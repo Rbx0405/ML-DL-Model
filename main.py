@@ -16,7 +16,6 @@ data = {
         "Long Battery", "Short Battery", "Budget", "Premium"
     ]
 }
-
 # Convert to DataFrame
 df = pd.DataFrame(data)
 
@@ -40,4 +39,4 @@ test_samples = [
 predictions = model.predict(test_samples)
 
 for txt, pred in zip(test_samples, predictions):
-    print(f"🔍 {txt}  --->  {pred}")
+    print(f" {txt}  --->  {pred}")
