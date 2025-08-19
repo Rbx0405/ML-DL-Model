@@ -1,34 +1,53 @@
+import os
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import Pipeline
 
-# Example training data (you can expand this CSV-like dataset)
-data = {
-    "text": [
-        "RTX 4060 graphics card", "RTX 4090 GPU", "Intel Iris integrated graphics",
-        "Intel i3 processor", "Ryzen 3 entry level", "Intel i7 processor", "Ryzen 7 CPU",
-        "Battery 6000mAh", "Battery 3000mAh", "Price 35000 INR", "Price 120000 INR"
-    ],
-    "label": [
-        "High GPU", "High GPU", "Low GPU",
-        "Low CPU", "Low CPU", "Good CPU", "Good CPU",
-        "Long Battery", "Short Battery", "Budget", "Premium"
-    ]
-}
-# Convert to DataFrame
-df = pd.DataFrame(data)
+# Get absolute path of the folder where main.py is located
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Create a pipeline (TF-IDF + Logistic Regression)
-model = Pipeline([
-    ("tfidf", TfidfVectorizer()),
-    ("clf", LogisticRegression())
-])
+# Build full file paths
+laptop_path = os.path.join(BASE_DIR, "laptop.csv")
+phone_path = os.path.join(BASE_DIR, "phone.csv")
 
-# Train the model
-model.fit(df["text"], df["label"])
+# Load datasets
+laptop_df = pd.read_csv(laptop_path)
+phone_df = pd.read_csv(phone_path)
 
-# Test
+print("Laptop dataset loaded with shape:", laptop_df.shape)
+print("Phone dataset loaded with shape:", phone_df.shape)
+# Function to train a model on a given dataset
+def train_model(df):
+    model = Pipeline([  
+        ("tfidf", TfidfVectorizer()),
+        ("clf", LogisticRegression(max_iter=1000))
+    ])
+    model.fit(df["text"], df["label"])
+    return model
+
+# Train models separately
+laptop_model = train_model(laptop_df)
+phone_model = train_model(phone_df)
+
+# Function to detect device type (rule-based)
+def detect_device(query: str):
+    query_lower = query.lower()
+    if "laptop" in query_lower or "notebook" in query_lower or "pc" in query_lower:
+        return "laptop"
+    elif "phone" in query_lower or "mobile" in query_lower or "smartphone" in query_lower:
+        return "phone"
+    else:
+        # Default choice if unsure
+        return "phone"
+
+# Function to predict based on query
+def predict_query(query: str):
+    device = detect_device(query)
+    if device == "laptop":
+        prediction = laptop_model.predict([query])[0]
+    else:
+        prediction = phone_model.predict([query])[0]
+    return device, prediction
+
+# Example test queries
 test_samples = [
     "Laptop with RTX 4060 and Intel i7",
     "Phone with 7000mAh battery",
@@ -36,7 +55,6 @@ test_samples = [
     "Laptop with Intel i3 processor"
 ]
 
-predictions = model.predict(test_samples)
-
-for txt, pred in zip(test_samples, predictions):
-    print(f" {txt}  --->  {pred}")
+for txt in test_samples:
+    device, pred = predict_query(txt)
+    print(f"{txt}  --->  ({device.upper()}) {pred}")
