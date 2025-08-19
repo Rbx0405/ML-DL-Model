@@ -1,0 +1,14 @@
+Brand,Model,Type,Display Size,Resolution,Processor,RAM,Storage,GPU,OS,OS Version,Weight,Price
+Apple,iPhone 13,Smartphone,6.1",2532x1170,A15 Bionic,4GB,128GB,Apple GPU,iOS,15,174g,799
+Samsung,Galaxy S21,Smartphone,6.2",2400x1080,Exynos 2100,8GB,128GB,Mali-G78,Android,11,171g,699
+Xiaomi,Redmi Note 10 Pro,Smartphone,6.67",2400x1080,Qualcomm Snapdragon 732G,6GB,128GB,Adreno 618,Android,11,193g,279
+OnePlus,OnePlus 9,Smartphone,6.55",2400x1080,Snapdragon 888,8GB,128GB,Adreno 660,Android,11,183g,729
+Realme,Realme 8,Smartphone,6.4",2400x1080,MediaTek Helio G95,6GB,128GB,Mali-G76,Android,11,177g,229
+Google,Pixel 6,Smartphone,6.4",2400x1080,Google Tensor,8GB,128GB,Mali-G78,Android,12,207g,599
+Samsung,Galaxy Note 20 Ultra,Smartphone,6.9",3088x1440,Snapdragon 865+,12GB,256GB,Adreno 650,Android,11,208g,1299
+Apple,iPhone 12 Mini,Smartphone,5.4",2340x1080,A14 Bionic,4GB,64GB,Apple GPU,iOS,14,135g,699
+Xiaomi,Mi 11 Ultra,Smartphone,6.81",3200x1440,Snapdragon 888,12GB,256GB,Adreno 660,Android,11,234g,1199
+OnePlus,OnePlus Nord CE 5G,Smartphone,6.43",2400x1080,Snapdragon 750G,6GB,128GB,Adreno 619,Android,11,170g,329
+Vivo,X60 Pro,Smartphone,6.56",2376x1080,Snapdragon 870,12GB,256GB,Adreno 650,Android,11,179g,579
+Oppo,Reno 6 Pro,Smartphone,6.55",2400x1080,MediaTek Dimensity 1200,8GB,128GB,Mali-G77,Android,11,177g,499
+Motorola,Edge 20 Pro,Smartphone,6.7",2400x1080,Snapdragon 870,12GB,256GB,Adreno 650,Android,11,190g,699
