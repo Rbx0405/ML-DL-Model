@@ -1,12 +1,15 @@
 import os
 import pandas as pd
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
 
 # Get absolute path of the folder where main.py is located
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Build full file paths
-laptop_path = os.path.join(BASE_DIR, "laptop.csv")
-phone_path = os.path.join(BASE_DIR, "phone.csv")
+laptop_path = os.path.join(BASE_DIR, "laptops.csv")
+phone_path = os.path.join(BASE_DIR, "Phone.csv")
 
 # Load datasets
 laptop_df = pd.read_csv(laptop_path)
@@ -14,9 +17,10 @@ phone_df = pd.read_csv(phone_path)
 
 print("Laptop dataset loaded with shape:", laptop_df.shape)
 print("Phone dataset loaded with shape:", phone_df.shape)
+
 # Function to train a model on a given dataset
 def train_model(df):
-    model = Pipeline([  
+    model = Pipeline([
         ("tfidf", TfidfVectorizer()),
         ("clf", LogisticRegression(max_iter=1000))
     ])
@@ -57,4 +61,4 @@ test_samples = [
 
 for txt in test_samples:
     device, pred = predict_query(txt)
-    print(f"{txt}  --->  ({device.upper()}) {pred}")
+    print(f"{txt} ---> ({device.upper()}) {pred}")
